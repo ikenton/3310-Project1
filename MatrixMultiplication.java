@@ -20,7 +20,7 @@ public class MatrixMultiplication {
         
     }
 
-    public static void divide(Integer[][] matrixes){
+    public static Integer[][][] divide(Integer[][] matrixes){
         //4 new matrixes
         int size = matrixes.length;
 
@@ -42,6 +42,9 @@ public class MatrixMultiplication {
                 System.out.println("d: "+d[i][j]);
             }
         }
+
+        Integer[][][] temp = {a,b,c,d};
+
     }
 
     public static Integer[][] bruteForce(Integer[][] A, Integer[][] B){
