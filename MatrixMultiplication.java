@@ -8,11 +8,40 @@ public class MatrixMultiplication {
        
         Integer[][] matrixA = {{2,0,-1,6}, {3,7,8,0}, {-5,1,6,-2}, {8,0,2,7}};
         Integer[][] matrixB = {{0,1,6,3}, {-2,8,7,1}, {2,0,-1,0}, {9,1,6,-2}};
-        bruteForce(matrixA,matrixB);
+        //bruteForce(matrixA,matrixB);
+        divide(matrixA);
     }
     
-    public Integer[][] loadMatrix(Integer[][] matrixes){
+    public static Integer[][] loadMatrix(Integer[][] matrixes){
+
+    }
+
+    public static Integer[][] conquer(Integer[][] matrixA, Integer[][] matrixB){
         
+    }
+
+    public static void divide(Integer[][] matrixes){
+        //4 new matrixes
+        int size = matrixes.length;
+
+        int div = size/2;
+
+        Integer[][] a = new Integer[div][div];
+        Integer[][] b = new Integer[div][div];
+        Integer[][] c = new Integer[div][div];
+        Integer[][] d = new Integer[div][div];
+        for(int i = 0; i < div; i++){
+            for(int j = 0; j< div;j++){
+                a[i][j] = matrixes[i][j];
+                b[i][j] = matrixes[i][j+div];
+                c[i][j] = matrixes[i + div][j];
+                d[i][j] = matrixes[i+div][j+div];
+                System.out.println("a: "+a[i][j]);
+                System.out.println("b: "+b[i][j]);
+                System.out.println("c: "+c[i][j]);
+                System.out.println("d: "+d[i][j]);
+            }
+        }
     }
 
     public static Integer[][] bruteForce(Integer[][] A, Integer[][] B){
