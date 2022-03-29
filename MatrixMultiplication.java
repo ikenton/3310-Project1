@@ -62,9 +62,23 @@ public class MatrixMultiplication {
                 p5B[i][j] = f[i][j] - h[i][j];
                 p6A[i][j] = c[i][j] + d[i][j];
                 p7A[i][j] = a[i][j] - c[i][j];
-                p7A[i][j] = e[i][j] + f[i][j];
+                p7B[i][j] = e[i][j] + f[i][j];
             }
         }
+        Integer[][] p1 = strassens(p1A, p1A);
+        Integer[][] p2 = strassens(d, p2B);
+        Integer[][] p3 = strassens(p3A, h);
+        Integer[][] p4 = strassens(p4A, p4B);
+        Integer[][] p5 = strassens(a, p5B);
+        Integer[][] p6 = strassens(p6A, e);
+        Integer[][] p7 = strassens(p7A, p7B);
+        
+        //stitch it all back together
+        /* c11 = p1 + p2 - p3 + p4
+         * c12 = p5 + p3
+         * c21 = p6 + p2
+         * c22 = p5 + p1 - p6 - p7
+        */
     }
 
     public static Integer[][] conquer(Integer[][] matrixA, Integer[][] matrixB){
