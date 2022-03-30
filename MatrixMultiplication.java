@@ -1,5 +1,5 @@
-import java.util.Scanner;
-import java.math.*;
+//import java.util.Scanner;
+//import java.math.*;
 public class MatrixMultiplication {
     public static void main(String[] args){
         //set up the matrix 
@@ -22,8 +22,10 @@ public class MatrixMultiplication {
     }
 
     public static Integer[][] strassens(Integer[][] A, Integer[][] B){
-        if(A.length <=2){
-            return bruteForce(A, B);
+        Integer[][] answer = new Integer[A.length][A.length];
+        if(A.length <= 1){
+            answer[0][0] = A[0][0]*B[0][0];
+            return answer;
         }
         Integer[][][] aThree = divide(A);
         Integer[][][] bThree = divide(B);
@@ -38,8 +40,7 @@ public class MatrixMultiplication {
         Integer[][] g = bThree[2];
         Integer[][] h = bThree[3];
 
-        //call recursively 7 times
-        //a+b 
+        
         Integer[][] p1A = new Integer[a.length][a.length];
         Integer[][] p1B = new Integer[a.length][a.length];
 //d     Integer[][] p2A = new Integer[a.length][a.length];
@@ -55,20 +56,8 @@ public class MatrixMultiplication {
         Integer[][] p7A = new Integer[a.length][a.length];
         Integer[][] p7B = new Integer[a.length][a.length];
 
-        for(int i = 0; i < A.length; i++){
-            for(int j = 0; i < A.length; j++){
-                p1A[i][j] = a[i][j] + d[i][j];
-                p1B[i][j] = e[i][j] + h[i][j];
-                p2B[i][j] = g[i][j] - e[i][j];
-                p3A[i][j] = a[i][j] + b[i][j];
-                p4A[i][j] = b[i][j] - d[i][j];
-                p4B[i][j] = g[i][j] + h[i][j];
-                p5B[i][j] = f[i][j] - h[i][j];
-                p6A[i][j] = c[i][j] + d[i][j];
-                p7A[i][j] = a[i][j] - c[i][j];
-                p7B[i][j] = e[i][j] + f[i][j];
-            }
-        }
+        
+        //call recursively 7 times 
         Integer[][] p1 = strassens(p1A, p1A);
         Integer[][] p2 = strassens(d, p2B);
         Integer[][] p3 = strassens(p3A, h);
@@ -81,8 +70,17 @@ public class MatrixMultiplication {
         /* c11 = p1 + p2 - p3 + p4
          * c12 = p5 + p3
          * c21 = p6 + p2
-         * c22 = p5 + p1 - p6 - p7
+         * c22 = p5 + p1 - p6 - p7 
         */
+    }
+
+    public static Integer[][] arrayAdd(Integer[][] A, Integer[][] B){
+        Integer[][] C = new Integer[A.length][A.length];
+        for(int i = 0; i < A.length; i++){
+            for(int j = 0; i < A.length; j++){
+                C[i][j] = A[i][j] + B[i][j];
+            }
+        }
     }
 
     public static Integer[][] conquer(Integer[][] matrixA, Integer[][] matrixB){
