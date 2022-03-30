@@ -122,7 +122,7 @@ public class MatrixMultiplication {
         //c21
         for(int i = c11.length; i < A.length; i++, x++){
             for(int j = 0; j < c11.length; j++, y++){
-                answer[i][j] = c12[x][y];
+                answer[i][j] = c21[x][y];
             }
         }
 
@@ -161,25 +161,76 @@ public class MatrixMultiplication {
 
     public static Integer[][] naive(Integer[][] matrixA, Integer[][] matrixB){
         //base case
+        Integer[][] answer = new Integer[matrixA.length][matrixA.length];
         if(matrixA.length <= 2 || matrixB.length <= 2){
-            return bruteForce(matrixA, matrixB);
-        }else {
-            Integer[][][] aThree = divide(matrixA);
-            Integer[][][] bThree = divide(matrixB);
-    
-            Integer[][] a = aThree[0];   
-            Integer[][] b = aThree[1];
-            Integer[][] c = aThree[2];
-            Integer[][] d = aThree[3];
-    
-            Integer[][] e = bThree[0];
-            Integer[][] f = bThree[1];
-            Integer[][] g = bThree[2];
-            Integer[][] h = bThree[3];
-
-            //8 recursive calls
-            
+            answer[0][0] = matrixA[0][0]*matrixB[0][0];
+            return answer;
         }
+        Integer[][][] aThree = divide(matrixA);
+        Integer[][][] bThree = divide(matrixB);
+
+        Integer[][] a = aThree[0];   
+        Integer[][] b = aThree[1];
+        Integer[][] c = aThree[2];
+        Integer[][] d = aThree[3];
+
+        Integer[][] e = bThree[0];
+        Integer[][] f = bThree[1];
+        Integer[][] g = bThree[2];
+        Integer[][] h = bThree[3];
+
+        //8 recursive calls
+        Integer[][] p1 = naive(a, e);
+        Integer[][] p2 = naive(b, g);
+        Integer[][] p3 = naive(a, f);
+        Integer[][] p4 = naive(b, h);
+        Integer[][] p5 = naive(c, e);
+        Integer[][] p6 = naive(d, g);
+        Integer[][] p7 = naive(c, f);
+        Integer[][] p8 = naive(d, h);
+        
+        Integer[][] c11 = arrayAdd(p1, p2);
+        Integer[][] c12 = arrayAdd(p3, p4);
+        Integer[][] c21 = arrayAdd(p5, p6);
+        Integer[][] c22 = arrayAdd(p7, p8);
+        
+        int x = 0; 
+        int y = 0;
+        //c11
+        for(int i = 0; i < c11.length; i++, x++){
+            for(int j = 0; j < c11.length; j++, y++){
+                answer[i][j] = c11[x][y];
+            }
+        }
+
+        x = 0; 
+        y = 0;
+        //c12
+        for(int i = 0; i < c11.length; i++, x++){
+            for(int j = c11.length; j < answer.length; j++,y++){
+                answer[i][j] = c12[x][y];
+            }
+        }
+
+        x = 0; 
+        y = 0;
+        //c21
+        for(int i = c11.length; i < answer.length; i++, x++){
+            for(int j = 0; j < c11.length; j++, y++){
+                answer[i][j] = c21[x][y];
+            }
+        }
+
+        x = 0; 
+        y = 0;
+        //c22
+        for(int i = c11.length; i < answer.length; i++, x++){
+            for(int j = c11.length; j < answer.length; j++, y++){
+                answer[i][j] = c22[x][y];
+            }
+        }
+
+        return answer;
 
     }
 
