@@ -73,7 +73,7 @@ public class MatrixMultiplication {
 
         
         //call recursively 7 times 
-        Integer[][] p1 = strassens(p1A, p1A);
+        Integer[][] p1 = strassens(p1A, p1B);
         Integer[][] p2 = strassens(d, p2B);
         Integer[][] p3 = strassens(p3A, h);
         Integer[][] p4 = strassens(p4A, p4B);
@@ -231,7 +231,6 @@ public class MatrixMultiplication {
         }
 
         return answer;
-
     }
 
     public static Integer[][][] divide(Integer[][] matrixes){
