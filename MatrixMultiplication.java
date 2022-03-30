@@ -134,6 +134,8 @@ public class MatrixMultiplication {
                 answer[i][j] = c22[x][y];
             }
         }
+
+        return answer;
         
     }
     
