@@ -17,6 +17,10 @@ public class MatrixMultiplication {
 
     }
 
+    public static Integer[][] stitch(Integer[][] matrixA, Integer[][] matrixB){
+        
+    }
+
     public static Integer[][] strassens(Integer[][] A, Integer[][] B){
         if(A.length <=2){
             return bruteForce(A, B);
