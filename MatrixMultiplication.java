@@ -41,20 +41,20 @@ public class MatrixMultiplication {
         Integer[][] h = bThree[3];
 
         
-        Integer[][] p1A = new Integer[a.length][a.length];
-        Integer[][] p1B = new Integer[a.length][a.length];
-//d     Integer[][] p2A = new Integer[a.length][a.length];
-        Integer[][] p2B = new Integer[a.length][a.length];
-        Integer[][] p3A = new Integer[a.length][a.length];
-//h     Integer[][] p3B = new Integer[a.length][a.length];
-        Integer[][] p4A = new Integer[a.length][a.length];
-        Integer[][] p4B = new Integer[a.length][a.length];
-//a     Integer[][] p5A = new Integer[a.length][a.length];
-        Integer[][] p5B = new Integer[a.length][a.length];
-        Integer[][] p6A = new Integer[a.length][a.length];
+        Integer[][] p1A = arrayAdd(a, d);
+        Integer[][] p1B = arrayAdd(e, h);
+//d     Integer[][] p2A = d
+        Integer[][] p2B = arraySub(g, e);
+        Integer[][] p3A = arrayAdd(a, b);
+        //Integer[][] p3B = h
+        Integer[][] p4A = arraySub(b, d);
+        Integer[][] p4B = arrayAdd(g, h);
+        //Integer[][] p5A = a
+        Integer[][] p5B = arraySub(f, h);
+        Integer[][] p6A = arrayAdd(c, d);
 //e     Integer[][] p6B = new Integer[a.length][a.length];
-        Integer[][] p7A = new Integer[a.length][a.length];
-        Integer[][] p7B = new Integer[a.length][a.length];
+        Integer[][] p7A = arraySub(a,c);
+        Integer[][] p7B = arrayAdd(a,d);
 
         
         //call recursively 7 times 
@@ -81,9 +81,20 @@ public class MatrixMultiplication {
                 C[i][j] = A[i][j] + B[i][j];
             }
         }
+        return C;
     }
 
-    public static Integer[][] conquer(Integer[][] matrixA, Integer[][] matrixB){
+    public static Integer[][] arraySub(Integer[][] A, Integer[][] B){
+        Integer[][] C = new Integer[A.length][A.length];
+        for(int i = 0; i < A.length; i++){
+            for(int j = 0; i < A.length; j++){
+                C[i][j] = A[i][j] - B[i][j];
+            }
+        }
+        return C;
+    }
+
+    public static Integer[][] naive(Integer[][] matrixA, Integer[][] matrixB){
         //base case
         if(matrixA.length <= 2 || matrixB.length <= 2){
             return bruteForce(matrixA, matrixB);
@@ -100,7 +111,8 @@ public class MatrixMultiplication {
             Integer[][] f = bThree[1];
             Integer[][] g = bThree[2];
             Integer[][] h = bThree[3];
-            
+
+            //8 recursive calls
             
         }
 
