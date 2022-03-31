@@ -73,87 +73,17 @@ public class MatrixMultiplication {
         Integer[][][] aThree = divide(A);
         Integer[][][] bThree = divide(B);
         
-        
-
-
         //SUB ARRAYS
         Integer[][] a = aThree[0]; 
-        /*System.out.println("a sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+a[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
-
         Integer[][] b = aThree[1];
-        /*System.out.println("b sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+b[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
         Integer[][] c = aThree[2];
-        /*System.out.println("c sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+c[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
         Integer[][] d = aThree[3];
-        /*System.out.println("d sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+d[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
 
         Integer[][] e = bThree[0];
-        /*System.out.println("e sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+e[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
         Integer[][] f = bThree[1];
-        /*System.out.println("f sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+f[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
         Integer[][] g = bThree[2];
-        /*System.out.println("g sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+g[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
         Integer[][] h = bThree[3];
-        /*System.out.println("h sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+h[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
-
-        //System.out.println("recursive start");
-        //call recursively 7 times 
+        
         Integer[][] p1 = strassens(arrayAdd(a, d), arrayAdd(e, h));
         Integer[][] p2 = strassens(d, arraySub(g, e));
         Integer[][] p3 = strassens(arrayAdd(a, b), h);
@@ -250,84 +180,16 @@ public class MatrixMultiplication {
         Integer[][][] aThree = divide(matrixA);
         Integer[][][] bThree = divide(matrixB);
         //SUB ARRAYS
-        Integer[][] a = aThree[0]; 
-        /*System.out.println("a sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+a[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
-
+        Integer[][] a = aThree[0];
         Integer[][] b = aThree[1];
-        /*System.out.println("b sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+b[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
         Integer[][] c = aThree[2];
-        /*System.out.println("c sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+c[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
         Integer[][] d = aThree[3];
-        /*System.out.println("d sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+d[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
-
 
         Integer[][] e = bThree[0];
-        /*System.out.println("e sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+e[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
         Integer[][] f = bThree[1];
-        /*System.out.println("f sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+f[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
         Integer[][] g = bThree[2];
-        /*System.out.println("g sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+g[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
         Integer[][] h = bThree[3];
-        /*System.out.println("h sub array");  
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j< a.length; j++){
-                System.out.print(" "+h[i][j]);
-            }
-            System.out.println();
-        }
-        System.out.println();*/
-
-        //System.out.println("recursive start");
-        //call recursively 8 times 
+        
         Integer[][] p1 = naive(a, e);
         Integer[][] p2 = naive(b, g);
         Integer[][] p3 = naive(a, f);
@@ -379,7 +241,7 @@ public class MatrixMultiplication {
         }
 
         Integer[][][] temp = {a,b,c,d};
-        System.out.println(temp[0][0][0]);
+        //System.out.println(temp[0][0][0]);
         return temp;
     }
 
@@ -392,7 +254,7 @@ public class MatrixMultiplication {
         Integer[][] answer = new Integer[size][size];
         for(int i = 0; i < size; i++){
             //controls A's rows
-            System.out.print(i +"  :  ");
+            //System.out.print(i +"  :  ");
             for(int j = 0; j < size; j++){
                 int sum = 0; 
                 //B's columns
