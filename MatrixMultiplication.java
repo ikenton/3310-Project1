@@ -17,7 +17,7 @@ public class MatrixMultiplication {
         
 
         Integer[][] matrixC= bruteForce(matrixA, matrixB);
-        //strassens(matrixA, matrixB); 
+        strassens(matrixA, matrixB); 
         
         for(int i = 0; i < matrixA.length; i++){
             for(int j = 0; j< matrixA.length; j++){
@@ -50,17 +50,55 @@ public class MatrixMultiplication {
     public static Integer[][] strassens(Integer[][] A, Integer[][] B){
         Integer[][] answer = new Integer[A.length][A.length];
         if(A.length <= 1){
+            System.out.println(A[0][0]+" "+B[0][0]);
             answer[0][0] = A[0][0]*B[0][0];
+            System.out.println(answer[0][0]);
             return answer;
         } 
         Integer[][][] aThree = divide(A);
         Integer[][][] bThree = divide(B);
         
-        //loop?.
-        Integer[][] a = aThree[0];   
+        
+
+
+        //SUB ARRAYS
+        Integer[][] a = aThree[0]; 
+        System.out.println("a sub array");  
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j< a.length; j++){
+                System.out.print(" "+a[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+
         Integer[][] b = aThree[1];
+        System.out.println("b sub array");  
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j< a.length; j++){
+                System.out.print(" "+b[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
         Integer[][] c = aThree[2];
+        System.out.println("c sub array");  
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j< a.length; j++){
+                System.out.print(" "+c[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
         Integer[][] d = aThree[3];
+        System.out.println("d sub array");  
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j< a.length; j++){
+                System.out.print(" "+d[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
 
         Integer[][] e = bThree[0];
         Integer[][] f = bThree[1];
@@ -81,7 +119,6 @@ public class MatrixMultiplication {
         Integer[][] p5B = arraySub(f, h);
         Integer[][] p6A = arrayAdd(c, d);
 //e     Integer[][] p6B = e
-        System.out.println("p7a");
         Integer[][] p7A = arraySub(a, c);
         Integer[][] p7B = arrayAdd(a, d);
 
@@ -101,7 +138,7 @@ public class MatrixMultiplication {
          * c21 = p6 + p2
          * c22 = p5 + p1 - p6 - p7 
         */
-        System.out.println("The c's");
+        //System.out.println("The c's");
         Integer[][] c11 = arrayAdd(p1, arraySub(p2, arrayAdd(p3, p4)));
         Integer[][] c12 = arrayAdd(p5, p3);
         Integer[][] c21 = arrayAdd(p6, p2);
@@ -115,6 +152,7 @@ public class MatrixMultiplication {
             }
             System.out.println();
         }
+        System.out.println();
         return answer;
         
     }
@@ -124,15 +162,21 @@ public class MatrixMultiplication {
         int n = size*2;
         Integer[][] answer = new Integer[n][n];
         for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++){
-                if(i < size && j < size){
-                    answer[i][j]=c11[i][j];
-                }else if(i < size && j >= size){
-                    answer[i][j]=c12[i][j - size];
-                }else if(i > size && j < size){
-                    answer[i][j]=c21[i-size][j];
-                }else if(i > size && j>size){
-                    answer[i][j] = c22[i-size][j-size];
+            if(i < size){
+                for(int j = 0; j < n; j++){
+                    if(j < size){
+                        answer[i][j] = c11[i][j];
+                    }else{
+                        answer[i][j] = c12[i][j - size];
+                    }
+                }
+            }else{
+                for(int j = 0; j < n; j++){
+                    if(j < size){
+                        answer[i][j] = c21[i-size][j];
+                    }else{
+                        answer[i][j] = c22[i-size][j-size];
+                    }
                 }
             }
         }
@@ -140,12 +184,16 @@ public class MatrixMultiplication {
     }
 
     public static Integer[][] arrayAdd(Integer[][] A, Integer[][] B){
+        System.out.println("ADDING");
         int n = A.length;
         Integer[][] C = new Integer[n][n];
         
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
                 C[i][j] = A[i][j] + B[i][j];
+                if(C[i][j] == 22){
+                    System.out.println("HERE IS WHERE 22 IS !!!!");
+                }
             }
         }
         return C;
@@ -241,6 +289,7 @@ public class MatrixMultiplication {
 
     public static Integer[][][] divide(Integer[][] matrixes){
         //4 new matrixes
+        System.out.println("DIVIDE");
         int size = matrixes.length;
 
         int div = size/2;
@@ -255,15 +304,16 @@ public class MatrixMultiplication {
                 b[i][j] = matrixes[i][j+div];
                 c[i][j] = matrixes[i + div][j];
                 d[i][j] = matrixes[i+div][j+div];
-                /*System.out.println("a: "+a[i][j]);
+               /* System.out.println("a: "+a[i][j]);
                 System.out.println("b: "+b[i][j]);
                 System.out.println("c: "+c[i][j]);
-                System.out.println("d: "+d[i][j]);
-                */
+                System.out.println("d: "+d[i][j]);*/
+                
             }
         }
 
         Integer[][][] temp = {a,b,c,d};
+        System.out.println(temp[0][0][0]);
         return temp;
     }
 
@@ -284,7 +334,7 @@ public class MatrixMultiplication {
                     //a's columns and b's rows
                     sum += A[i][x] * B[x][j];
                     //System.out.println("sum: "+ sum);
-                    System.out.print("\ti: "+i+" j: "+j+" x: "+x);
+                    //System.out.print("\ti: "+i+" j: "+j+" x: "+x);
                 }
                 answer[i][j] = sum;
                 System.out.print(answer[i][j]+" ");
