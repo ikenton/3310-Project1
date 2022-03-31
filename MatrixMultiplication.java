@@ -14,15 +14,17 @@ public class MatrixMultiplication {
         //divide(matrixA);
 
 
-        bruteForce(matrixA, matrixB);
+        //bruteForce(matrixA, matrixB);
         strassens(matrixA, matrixB);
-        naive(matrixA, matrixB);
+        //naive(matrixA, matrixB);
+        
     }
     
+    /*
     public static Integer[][] loadMatrix(Integer[][] matrixes){
         /*for extra credit add 0's to the ends.
             check if its' a power of 2 if not, load 0's
-        */
+        
         Scanner kb = new Scanner(System.in);
         int n = matrixes.length;
 
@@ -34,6 +36,7 @@ public class MatrixMultiplication {
             }
         }
     }
+    */
 
     public static Integer[][] strassens(Integer[][] A, Integer[][] B){
         Integer[][] answer = new Integer[A.length][A.length];
@@ -44,7 +47,7 @@ public class MatrixMultiplication {
         Integer[][][] aThree = divide(A);
         Integer[][][] bThree = divide(B);
         
-        //loop?
+        //loop?.
         Integer[][] a = aThree[0];   
         Integer[][] b = aThree[1];
         Integer[][] c = aThree[2];
@@ -55,6 +58,7 @@ public class MatrixMultiplication {
         Integer[][] g = bThree[2];
         Integer[][] h = bThree[3];
 
+        //System.out.println("CHECK POINT : "+ a[0][0]);
         
         Integer[][] p1A = arrayAdd(a, d);
         Integer[][] p1B = arrayAdd(e, h);
@@ -93,56 +97,37 @@ public class MatrixMultiplication {
         Integer[][] c21 = arrayAdd(p6, p2);
         Integer[][] c22 = arrayAdd(p5, arraySub(p1, arraySub(p6, p7)));
 
-        /*
-            [i][j];
-            [i][j+div];
-            [i + div][j];
-            [i+div][j+div];
-        */
-        int x = 0; 
-        int y = 0;
-        //c11
-        for(int i = 0; i < c11.length; i++, x++){
-            for(int j = 0; j < c11.length; j++, y++){
-                answer[i][j] = c11[x][y];
-            }
-        }
-
-        x = 0; 
-        y = 0;
-        //c12
-        for(int i = 0; i < c11.length; i++, x++){
-            for(int j = c11.length; j < A.length; j++,y++){
-                answer[i][j] = c12[x][y];
-            }
-        }
-
-        x = 0; 
-        y = 0;
-        //c21
-        for(int i = c11.length; i < A.length; i++, x++){
-            for(int j = 0; j < c11.length; j++, y++){
-                answer[i][j] = c21[x][y];
-            }
-        }
-
-        x = 0; 
-        y = 0;
-        //c22
-        for(int i = c11.length; i < A.length; i++, x++){
-            for(int j = c11.length; j < A.length; j++, y++){
-                answer[i][j] = c22[x][y];
-            }
-        }
+        answer = stitch(c11, c12, c21, c22);
 
         return answer;
         
     }
     
+    public static Integer[][] stitch(Integer[][] c11,Integer[][] c12, Integer[][] c21, Integer[][] c22){
+        int size = c11.length;
+        int n = size*2;
+        Integer[][] answer = new Integer[n][n];
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
+                if(i < size && j < size){
+                    answer[i][j]=c11[i][j];
+                }else if(i < size && j >= size){
+                    answer[i][j]=c12[i][j - size];
+                }else if(i > size && j < size){
+                    answer[i][j]=c21[i-size][j];
+                }else if(i > size && j>size){
+                    answer[i][j] = c22[i-size][j-size];
+                }
+            }
+        }
+        return answer;  
+    }
+
     public static Integer[][] arrayAdd(Integer[][] A, Integer[][] B){
         Integer[][] C = new Integer[A.length][A.length];
-        for(int i = 0; i < A.length; i++){
-            for(int j = 0; i < A.length; j++){
+        int n = A.length;
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
                 C[i][j] = A[i][j] + B[i][j];
             }
         }
@@ -151,8 +136,9 @@ public class MatrixMultiplication {
 
     public static Integer[][] arraySub(Integer[][] A, Integer[][] B){
         Integer[][] C = new Integer[A.length][A.length];
-        for(int i = 0; i < A.length; i++){
-            for(int j = 0; i < A.length; j++){
+        int n = A.length;
+        for(int i = 0; i < n; i++){
+            for(int j = 0; j < n; j++){
                 C[i][j] = A[i][j] - B[i][j];
             }
         }
@@ -249,10 +235,11 @@ public class MatrixMultiplication {
                 b[i][j] = matrixes[i][j+div];
                 c[i][j] = matrixes[i + div][j];
                 d[i][j] = matrixes[i+div][j+div];
-                System.out.println("a: "+a[i][j]);
+                /*System.out.println("a: "+a[i][j]);
                 System.out.println("b: "+b[i][j]);
                 System.out.println("c: "+c[i][j]);
                 System.out.println("d: "+d[i][j]);
+                */
             }
         }
 
