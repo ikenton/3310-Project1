@@ -10,17 +10,20 @@ public class MatrixMultiplication {
        
         Integer[][] matrixA = {{2,0,-1,6}, {3,7,8,0}, {-5,1,6,-2}, {8,0,2,7}};
         Integer[][] matrixB = {{0,1,6,3}, {-2,8,7,1}, {2,0,-1,0}, {9,1,6,-2}};
+
+        Integer[][] test1 = {{1,3}, {4,5}};
+        Integer[][] test2 = {{4, 6}, {20,1}};
         //bruteForce(matrixA,matrixB);
         //divide(matrixA);
 
 
         
 
-        Integer[][] matrixC= bruteForce(matrixA, matrixB);
-        strassens(matrixA, matrixB); 
+        Integer[][] matrixC= bruteForce(test1, test2);
+        strassens(test1, test2); 
         
-        for(int i = 0; i < matrixA.length; i++){
-            for(int j = 0; j< matrixA.length; j++){
+        for(int i = 0; i < test2.length; i++){
+            for(int j = 0; j< test2.length; j++){
                 System.out.print(" "+matrixC[i][j]);
             }
             System.out.println();
@@ -50,7 +53,7 @@ public class MatrixMultiplication {
     public static Integer[][] strassens(Integer[][] A, Integer[][] B){
         Integer[][] answer = new Integer[A.length][A.length];
         if(A.length <= 1){
-            System.out.println(A[0][0]+" "+B[0][0]);
+            //System.out.println(A[0][0]+" "+B[0][0]);
             answer[0][0] = A[0][0]*B[0][0];
             System.out.println(answer[0][0]);
             return answer;
@@ -100,37 +103,53 @@ public class MatrixMultiplication {
         }
         System.out.println();
 
-        Integer[][] e = bThree[0];
-        Integer[][] f = bThree[1];
-        Integer[][] g = bThree[2];
-        Integer[][] h = bThree[3];
 
-        //System.out.println("CHECK POINT : "+ a[0][0]);
-        
-        Integer[][] p1A = arrayAdd(a, d);
-        Integer[][] p1B = arrayAdd(e, h);
-//d     Integer[][] p2A = d
-        Integer[][] p2B = arraySub(g, e);
-        Integer[][] p3A = arrayAdd(a, b);
-        //Integer[][] p3B = h
-        Integer[][] p4A = arraySub(b, d);
-        Integer[][] p4B = arrayAdd(g, h);
-        //Integer[][] p5A = a
-        Integer[][] p5B = arraySub(f, h);
-        Integer[][] p6A = arrayAdd(c, d);
-//e     Integer[][] p6B = e
-        Integer[][] p7A = arraySub(a, c);
-        Integer[][] p7B = arrayAdd(a, d);
+        Integer[][] e = bThree[0];
+        System.out.println("e sub array");  
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j< a.length; j++){
+                System.out.print(" "+e[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+        Integer[][] f = bThree[1];
+        System.out.println("f sub array");  
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j< a.length; j++){
+                System.out.print(" "+f[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+        Integer[][] g = bThree[2];
+        System.out.println("g sub array");  
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j< a.length; j++){
+                System.out.print(" "+g[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
+        Integer[][] h = bThree[3];
+        System.out.println("h sub array");  
+        for(int i = 0; i < a.length; i++){
+            for(int j = 0; j< a.length; j++){
+                System.out.print(" "+h[i][j]);
+            }
+            System.out.println();
+        }
+        System.out.println();
 
         System.out.println("recursive start");
         //call recursively 7 times 
-        Integer[][] p1 = strassens(p1A, p1B);
-        Integer[][] p2 = strassens(d, p2B);
-        Integer[][] p3 = strassens(p3A, h);
-        Integer[][] p4 = strassens(p4A, p4B);
-        Integer[][] p5 = strassens(a, p5B);
-        Integer[][] p6 = strassens(p6A, e);
-        Integer[][] p7 = strassens(p7A, p7B);
+        Integer[][] p1 = strassens(arrayAdd(a, d), arrayAdd(e, h));
+        Integer[][] p2 = strassens(d, arraySub(g, e));
+        Integer[][] p3 = strassens(arrayAdd(a, b), h);
+        Integer[][] p4 = strassens(arraySub(b, d), arrayAdd(g, h));
+        Integer[][] p5 = strassens(a, arraySub(f, h));
+        Integer[][] p6 = strassens(arrayAdd(c, d), e);
+        Integer[][] p7 = strassens(arraySub(a, c), arrayAdd(e, f));
         
         //stitch it all back together
         /* c11 = p1 + p2 - p3 + p4
@@ -138,11 +157,11 @@ public class MatrixMultiplication {
          * c21 = p6 + p2
          * c22 = p5 + p1 - p6 - p7 
         */
-        //System.out.println("The c's");
-        Integer[][] c11 = arrayAdd(p1, arraySub(p2, arrayAdd(p3, p4)));
+        System.out.println("The c's");
+        Integer[][] c11 = arraySub(arrayAdd(arrayAdd(p1, p2), p4), p3);
         Integer[][] c12 = arrayAdd(p5, p3);
         Integer[][] c21 = arrayAdd(p6, p2);
-        Integer[][] c22 = arrayAdd(p5, arraySub(p1, arraySub(p6, p7)));
+        Integer[][] c22 = arraySub(arraySub(arrayAdd(p5, p1), p6), p7);
 
         answer = stitch(c11, c12, c21, c22);
 
@@ -184,16 +203,15 @@ public class MatrixMultiplication {
     }
 
     public static Integer[][] arrayAdd(Integer[][] A, Integer[][] B){
-        System.out.println("ADDING");
+        
         int n = A.length;
         Integer[][] C = new Integer[n][n];
         
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
+                System.out.println(A[i][j] +" + "+ B[i][j]);
                 C[i][j] = A[i][j] + B[i][j];
-                if(C[i][j] == 22){
-                    System.out.println("HERE IS WHERE 22 IS !!!!");
-                }
+                System.out.println(" Add "+C[i][j]);
             }
         }
         return C;
@@ -206,7 +224,9 @@ public class MatrixMultiplication {
         
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
+                System.out.println(A[i][j] +" - "+ B[i][j]);
                 C[i][j] = A[i][j] - B[i][j];
+                System.out.println("Sub "+C[i][j]);
             }
         }
         return C;
