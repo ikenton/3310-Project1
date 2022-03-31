@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 
 //import java.util.Scanner;
 //import java.math.*;
@@ -14,8 +14,17 @@ public class MatrixMultiplication {
         //divide(matrixA);
 
 
-        //bruteForce(matrixA, matrixB);
-        strassens(matrixA, matrixB);
+        
+
+        Integer[][] matrixC= bruteForce(matrixA, matrixB);
+        //strassens(matrixA, matrixB); 
+        
+        for(int i = 0; i < matrixA.length; i++){
+            for(int j = 0; j< matrixA.length; j++){
+                System.out.print(" "+matrixC[i][j]);
+            }
+            System.out.println();
+        }
         //naive(matrixA, matrixB);
         
     }
@@ -43,7 +52,7 @@ public class MatrixMultiplication {
         if(A.length <= 1){
             answer[0][0] = A[0][0]*B[0][0];
             return answer;
-        }
+        } 
         Integer[][][] aThree = divide(A);
         Integer[][][] bThree = divide(B);
         
@@ -72,10 +81,11 @@ public class MatrixMultiplication {
         Integer[][] p5B = arraySub(f, h);
         Integer[][] p6A = arrayAdd(c, d);
 //e     Integer[][] p6B = e
+        System.out.println("p7a");
         Integer[][] p7A = arraySub(a, c);
         Integer[][] p7B = arrayAdd(a, d);
 
-        
+        System.out.println("recursive start");
         //call recursively 7 times 
         Integer[][] p1 = strassens(p1A, p1B);
         Integer[][] p2 = strassens(d, p2B);
@@ -91,7 +101,7 @@ public class MatrixMultiplication {
          * c21 = p6 + p2
          * c22 = p5 + p1 - p6 - p7 
         */
-
+        System.out.println("The c's");
         Integer[][] c11 = arrayAdd(p1, arraySub(p2, arrayAdd(p3, p4)));
         Integer[][] c12 = arrayAdd(p5, p3);
         Integer[][] c21 = arrayAdd(p6, p2);
@@ -99,6 +109,12 @@ public class MatrixMultiplication {
 
         answer = stitch(c11, c12, c21, c22);
 
+        for(int i = 0; i < A.length; i++){
+            for(int j = 0; j< A.length; j++){
+                System.out.print(" "+answer[i][j]);
+            }
+            System.out.println();
+        }
         return answer;
         
     }
@@ -124,8 +140,9 @@ public class MatrixMultiplication {
     }
 
     public static Integer[][] arrayAdd(Integer[][] A, Integer[][] B){
-        Integer[][] C = new Integer[A.length][A.length];
         int n = A.length;
+        Integer[][] C = new Integer[n][n];
+        
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
                 C[i][j] = A[i][j] + B[i][j];
@@ -133,10 +150,12 @@ public class MatrixMultiplication {
         }
         return C;
     }
+    
 
     public static Integer[][] arraySub(Integer[][] A, Integer[][] B){
-        Integer[][] C = new Integer[A.length][A.length];
         int n = A.length;
+        Integer[][] C = new Integer[n][n];
+        
         for(int i = 0; i < n; i++){
             for(int j = 0; j < n; j++){
                 C[i][j] = A[i][j] - B[i][j];
@@ -144,6 +163,7 @@ public class MatrixMultiplication {
         }
         return C;
     }
+    
 
     public static Integer[][] naive(Integer[][] matrixA, Integer[][] matrixB){
         //base case
@@ -264,7 +284,7 @@ public class MatrixMultiplication {
                     //a's columns and b's rows
                     sum += A[i][x] * B[x][j];
                     //System.out.println("sum: "+ sum);
-                    //System.out.print("\ti: "+i+" j: "+j+" x: "+x);
+                    System.out.print("\ti: "+i+" j: "+j+" x: "+x);
                 }
                 answer[i][j] = sum;
                 System.out.print(answer[i][j]+" ");
