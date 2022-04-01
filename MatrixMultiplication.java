@@ -19,32 +19,29 @@ public class MatrixMultiplication {
         Integer[][] A = new Integer[n][n];
         
         System.out.println("Enter values for 1st matrix: ");
-        
         for(int i = 0; i < n; i++){
-            System.out.print("Row "+(i+1)+" ");
+            //System.out.print("Row "+(i+1)+" ");
             for(int j = 0; j < n; j++){
-                System.out.print("column "+(j+1)+": ");
-                A[i][j] = kb.nextInt();
+                //System.out.print("column "+(j+1)+": ");
+                A[i][j] = (int)(Math.random()*50);
             }
         }
         Integer[][] B = new Integer[n][n];
-        System.out.println("Enter values for 2nd matrix: ");
         for(int i = 0; i < n; i++){
-            System.out.print("Row "+(i+1)+" ");
+            //System.out.print("Row "+(i+1)+" ");
             for(int j = 0; j < n; j++){
-                System.out.print("column "+(j+1)+": ");
-                B[i][j] = kb.nextInt();
+                B[i][j] = (int)(Math.random()*50);
             }
         }
-        B = loadMatrix(B);
+    
 
         Integer[][] matrixC= naive(A, B);
         Integer[][] strass = strassens(A, B); 
         Integer[][] brute = bruteForce(A, B);       
         
         System.out.println("Strassens: ");
-        for(int i = 0; i < matrixA.length; i++){
-            for(int j = 0; j< matrixA.length; j++){
+        for(int i = 0; i < A.length; i++){
+            for(int j = 0; j< A.length; j++){
                 System.out.print(" "+strass[i][j]);
             }
             System.out.println();
@@ -52,8 +49,8 @@ public class MatrixMultiplication {
         System.out.println();
 
         System.out.println("Naive: ");
-        for(int i = 0; i < matrixC.length; i++){
-            for(int j = 0; j< matrixC.length; j++){
+        for(int i = 0; i < A.length; i++){
+            for(int j = 0; j< A.length; j++){
                 System.out.print(" "+matrixC[i][j]);
             }
             System.out.println();
@@ -76,11 +73,9 @@ public class MatrixMultiplication {
         /*for extra credit add 0's to the ends.
             check if its' a power of 2 if not, load 0's*/
         
-        Scanner kb = new Scanner(System.in);
         int n = matrixes.length;
 
         
-        kb.close();
         return matrixes;
     }
     
@@ -128,8 +123,6 @@ public class MatrixMultiplication {
         Integer[][] c22 = arraySub(arraySub(arrayAdd(p5, p1), p6), p7);
 
         answer = stitch(c11, c12, c21, c22);
-
-        
         return answer;
         
     }
