@@ -12,7 +12,7 @@ public class MatrixMultiplication {
         Integer[][] test1 = {{1,3}, {4,5}};
         Integer[][] test2 = {{4, 6}, {20,1}};
         
-        System.out.println("Enter matrix size to the power of 2: ");
+        System.out.println("Enter matrix size: ");
         
         int n = kb.nextInt();
         kb.nextLine();
@@ -29,10 +29,11 @@ public class MatrixMultiplication {
                 B[i][j] = (int)(Math.random()*50);
             }
         }
+        A = loadMatrix(A);
+        B = loadMatrix(B);
        
         long start = System.nanoTime();
-        A = loadMatrix(A);
-        //Integer[][] strass = strassens(A, B); 
+        Integer[][] strass = strassens(A, B); 
         long end = System.nanoTime();
         System.out.println("time strassens took in nano seconds: "+(end - start));
         //System.out.println("Strassens: ");
@@ -43,8 +44,7 @@ public class MatrixMultiplication {
             System.out.println();
         }*/
         start = System.nanoTime();
-        
-        //Integer[][] matrixC= naive(A, B);
+        Integer[][] matrixC= naive(A, B);
         end = System.nanoTime();
         System.out.println("Time naive took in nano seconds: "+(end - start));
         //System.out.println("Naive: ");
@@ -56,7 +56,7 @@ public class MatrixMultiplication {
         }*/
         
         start = System.nanoTime();
-        //Integer[][] brute = bruteForce(A, B);  
+        Integer[][] brute = bruteForce(A, B);  
         end = System.nanoTime();
         System.out.println("Time brute force took in nano seconds: "+ (end - start));     
         
@@ -75,9 +75,9 @@ public class MatrixMultiplication {
         //should make sure new size is a power of 2
         int n = matrixes.length;
         int size = setNewSize(matrixes);
-        System.out.println("new size: "+ size);
+        //System.out.println("new size: "+ size);
         if(n != size){
-            System.out.println("Change in size: ");
+            //System.out.println("Change in size: ");
             Integer[][] newMatrix = new Integer[size][size];
             for(int i = 0; i < size; i++){
                 for(int j = 0; j < size; j++){
@@ -85,9 +85,9 @@ public class MatrixMultiplication {
                     if(j < n && i < n){
                         newMatrix[i][j]=matrixes[i][j];
                     }
-                    System.out.print(" "+ newMatrix[i][j]);
+                    //System.out.print(" "+ newMatrix[i][j]);
                 }
-                System.out.println();
+                //System.out.println();
             }
             return newMatrix;
         }else 
@@ -104,7 +104,7 @@ public class MatrixMultiplication {
         //what is the next closest power of 2 that way I don't have to keep guessing
         if(!isPowerOf2(n)){
             int p = (int)Math.ceil(Math.log(n));
-            System.out.println(p);
+            //System.out.println(p);
             int newSize = (int)Math.pow(2, p);
             System.out.println(newSize);
             while(isPowerOf2(newSize) && newSize < n){
