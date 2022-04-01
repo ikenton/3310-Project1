@@ -1,20 +1,46 @@
 
 
-//import java.util.Scanner;
-//import java.math.*;
+import java.util.Scanner;
+import java.math.*;
 public class MatrixMultiplication {
     public static void main(String[] args){
-       
+        Scanner kb = new Scanner(System.in);
+        //sanity check
         Integer[][] matrixA = {{2,0,-1,6}, {3,7,8,0}, {-5,1,6,-2}, {8,0,2,7}};
         Integer[][] matrixB = {{0,1,6,3}, {-2,8,7,1}, {2,0,-1,0}, {9,1,6,-2}};
 
         Integer[][] test1 = {{1,3}, {4,5}};
         Integer[][] test2 = {{4, 6}, {20,1}};
-          
+        
+        System.out.println("Enter matrix size to the power of 2: ");
+        
+        int n = kb.nextInt();
+        kb.nextLine();
+        Integer[][] A = new Integer[n][n];
+        
+        System.out.println("Enter values for 1st matrix: ");
+        
+        for(int i = 0; i < n; i++){
+            System.out.print("Row "+(i+1)+" ");
+            for(int j = 0; j < n; j++){
+                System.out.print("column "+(j+1)+": ");
+                A[i][j] = kb.nextInt();
+            }
+        }
+        Integer[][] B = new Integer[n][n];
+        System.out.println("Enter values for 2nd matrix: ");
+        for(int i = 0; i < n; i++){
+            System.out.print("Row "+(i+1)+" ");
+            for(int j = 0; j < n; j++){
+                System.out.print("column "+(j+1)+": ");
+                B[i][j] = kb.nextInt();
+            }
+        }
+        B = loadMatrix(B);
 
-        Integer[][] matrixC= naive(matrixA, matrixB);
-        Integer[][] strass = strassens(matrixA, matrixB); 
-        Integer[][] brute = bruteForce(matrixA, matrixB);       
+        Integer[][] matrixC= naive(A, B);
+        Integer[][] strass = strassens(A, B); 
+        Integer[][] brute = bruteForce(A, B);       
         
         System.out.println("Strassens: ");
         for(int i = 0; i < matrixA.length; i++){
@@ -42,25 +68,22 @@ public class MatrixMultiplication {
             System.out.println();
         }
         System.out.println();
+        kb.close();
     }
     
-    /*
+    
     public static Integer[][] loadMatrix(Integer[][] matrixes){
         /*for extra credit add 0's to the ends.
-            check if its' a power of 2 if not, load 0's
+            check if its' a power of 2 if not, load 0's*/
         
         Scanner kb = new Scanner(System.in);
         int n = matrixes.length;
 
-        System.out.println("Enter integer: ");
-        for(int i = 0; i < n; i++){
-            for(int j = 0; j < n; j++){
-                System.out.println(": ");
-                matrixes[i][j] = kb.nextInt();
-            }
-        }
+        
+        kb.close();
+        return matrixes;
     }
-    */
+    
 
     public static Integer[][] strassens(Integer[][] A, Integer[][] B){
         Integer[][] answer = new Integer[A.length][A.length];
