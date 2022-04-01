@@ -106,11 +106,12 @@ public class MatrixMultiplication {
             int p = (int)Math.ceil(Math.log(n));
             //System.out.println(p);
             int newSize = (int)Math.pow(2, p);
-            System.out.println(newSize);
+            //System.out.println(newSize);
             while(isPowerOf2(newSize) && newSize < n){
                 newSize = 2*newSize;
-                System.out.println("New size: "+ newSize);
+                
             }
+            System.out.println("New size: "+ newSize);
             return newSize;
         }else{
             System.out.println("number is already power of 2");
