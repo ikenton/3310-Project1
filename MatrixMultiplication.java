@@ -81,10 +81,9 @@ public class MatrixMultiplication {
             Integer[][] newMatrix = new Integer[size][size];
             for(int i = 0; i < size; i++){
                 for(int j = 0; j < size; j++){
-                    if(n < j){
-                        newMatrix[i][j] = 0;
-                    }else{
-                        newMatrix[i][j] = matrixes[i][j];
+                    newMatrix[i][j] = 0;
+                    if(j < n && i < n){
+                        newMatrix[i][j]=matrixes[i][j];
                     }
                     System.out.print(" "+ newMatrix[i][j]);
                 }
