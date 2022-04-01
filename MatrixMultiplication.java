@@ -17,68 +17,83 @@ public class MatrixMultiplication {
         int n = kb.nextInt();
         kb.nextLine();
         Integer[][] A = new Integer[n][n];
-        
-        System.out.println("Enter values for 1st matrix: ");
         for(int i = 0; i < n; i++){
-            //System.out.print("Row "+(i+1)+" ");
             for(int j = 0; j < n; j++){
-                //System.out.print("column "+(j+1)+": ");
                 A[i][j] = (int)(Math.random()*50);
             }
         }
+
         Integer[][] B = new Integer[n][n];
         for(int i = 0; i < n; i++){
-            //System.out.print("Row "+(i+1)+" ");
             for(int j = 0; j < n; j++){
                 B[i][j] = (int)(Math.random()*50);
             }
         }
-    
-
-        Integer[][] matrixC= naive(A, B);
-        Integer[][] strass = strassens(A, B); 
-        Integer[][] brute = bruteForce(A, B);       
-        
-        System.out.println("Strassens: ");
-        for(int i = 0; i < A.length; i++){
-            for(int j = 0; j< A.length; j++){
+       
+        long start = System.nanoTime();
+        Integer[][] strass = strassens(matrixA, matrixB); 
+        long end = System.nanoTime();
+        System.out.println("time strassens took in nano seconds: "+(end - start));
+        //System.out.println("Strassens: ");
+        /*for(int i = 0; i < strass.length; i++){
+            for(int j = 0; j< strass.length; j++){
                 System.out.print(" "+strass[i][j]);
             }
             System.out.println();
-        }
-        System.out.println();
-
-        System.out.println("Naive: ");
-        for(int i = 0; i < A.length; i++){
-            for(int j = 0; j< A.length; j++){
+        }*/
+        
+        start = System.nanoTime();
+        Integer[][] matrixC= naive(A, B);
+        end = System.nanoTime();
+        System.out.println("Time naive took in nano seconds: "+(end - start));
+        //System.out.println("Naive: ");
+        /*for(int i = 0; i < matrixC.length; i++){
+            for(int j = 0; j< matrixC.length; j++){
                 System.out.print(" "+matrixC[i][j]);
             }
             System.out.println();
-        }
-        System.out.println();
-
-        System.out.println("Brute force: ");
+        }*/
+        
+        start = System.nanoTime();
+        Integer[][] brute = bruteForce(A, B);  
+        end = System.nanoTime();
+        System.out.println("Time brute force took in nano seconds: "+ (end - start));     
+        
+        /*System.out.println("Brute force: ");
         for(int i = 0; i < brute.length; i++){
             for(int j = 0; j< brute.length; j++){
                 System.out.print(" "+brute[i][j]);
             }
             System.out.println();
         }
-        System.out.println();
+        System.out.println();*/
         kb.close();
     }
     
     
-    public static Integer[][] loadMatrix(Integer[][] matrixes){
+    /*public static Integer[][] loadMatrix(Integer[][] matrixes){
         /*for extra credit add 0's to the ends.
             check if its' a power of 2 if not, load 0's*/
         
-        int n = matrixes.length;
+        /*int n = matrixes.length;
+        //if not power of 2
+        int powTwoSize = 2*n;
+        if(isPowerOf2(n)){
+            for(int i = 0; i < 2*n; i++){
 
+            }
+        }
         
         return matrixes;
-    }
+    }*/
     
+    public static boolean isPowerOf2(int num){
+        if (num==0){
+            return false;
+        }else{
+            return (int)(Math.ceil((Math.log(num)/Math.log(2)))) == (int)(Math.floor((Math.log(num)/Math.log(2))));
+        }
+    }
 
     public static Integer[][] strassens(Integer[][] A, Integer[][] B){
         Integer[][] answer = new Integer[A.length][A.length];
